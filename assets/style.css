@@ -1,4 +1,50 @@
-body { font-family: sans-serif; background:#fafafa; text-align:center; padding:2rem; }
-.container { max-width:500px; margin:auto; }
-input { padding:1rem; width:100%; border-radius:8px; border:1px solid #ccc; font-size:1.2rem; }
-#result { margin-top:1.5rem; font-size:1.3rem; }
+/* Page Background & General Font */
+body {
+  font-family: 'Georgia', serif; /* elegant serif font for wedding theme */
+  background-color: #6b0a16;      /* deep burgundy background */
+  color: #fff;                     /* default text color */
+  text-align: center;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;               /* full screen height */
+  margin: 0;
+  flex-direction: column;
+}
+
+/* Heading with Gold Gradient & Shadow */
+.wedding-title {
+  text-align: center;
+  font-size: 3rem;
+  line-height: 1.2;
+  background: linear-gradient(90deg, #FFD700, #FFA500); /* gold gradient */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* subtle shadow */
+  margin-bottom: 2rem;
+}
+
+/* Container for Search Box */
+.container {
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+}
+
+/* Input Styles */
+input {
+  padding: 1rem;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1.2rem;
+  box-sizing: border-box;
+}
+
+/* Result Text */
+#result {
+  margin-top: 1.5rem;
+  font-size: 1.3rem;
+  color: #fff; /* ensure result is readable on burgundy */
+}
