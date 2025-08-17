@@ -66,6 +66,22 @@ input {
   background-color: #FFD700; /* gold */
   color: #6b0a16; /* burgundy text inside gold */
   font-weight: bold;
-  padding: 0 2px;
+  padding: 0 3px;
   border-radius: 3px;
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 3px #FFD700;
+    background-color: #FFD700;
+  }
+  50% {
+    box-shadow: 0 0 8px #FFD700;
+    background-color: #FFEC70;
+  }
+  100% {
+    box-shadow: 0 0 3px #FFD700;
+    background-color: #FFD700;
+  }
 }
