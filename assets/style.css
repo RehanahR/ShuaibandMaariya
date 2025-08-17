@@ -13,45 +13,28 @@ body {
   flex-direction: column;
 }
 
-/* Container for Swirling Border */
+/* Container with Static Gold Swirl SVG Border */
 .page-border {
   position: relative;
   padding: 2rem;
   margin: 1rem;
-  border: 10px solid transparent;
-  border-radius: 20px;
-  background: #6b0a16; /* burgundy inside */
-  background-clip: padding-box; /* keep inner bg inside */
-}
-
-/* Animated Gold Swirl Border with Glow */
-.page-border::before {
-  content: "";
-  position: absolute;
-  top: -10px; left: -10px; right: -10px; bottom: -10px;
+  border: 20px solid transparent;
   border-radius: 30px;
-  padding: 10px;
-  background: conic-gradient(
-    from 0deg,
-    #FFD700,
-    #FFEC70,
-    #FFD700,
-    #FFEC70,
-    #FFD700
-  );
-  z-index: -1;
-  animation: swirl 8s linear infinite, glowBorder 2s ease-in-out infinite alternate;
-}
+  background-color: #6b0a16; /* burgundy inside */
+  background-clip: padding-box;
 
-@keyframes swirl {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes glowBorder {
-  0% { box-shadow: 0 0 10px #FFD700; }
-  50% { box-shadow: 0 0 25px #FFD700; }
-  100% { box-shadow: 0 0 10px #FFD700; }
+  /* Decorative swirl border using inline SVG pattern */
+  border-image: url('data:image/svg+xml;utf8,
+    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+      <defs>
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="%23FFD700"/>
+          <stop offset="100%" stop-color="%23FFA500"/>
+        </linearGradient>
+      </defs>
+      <path d="M10,50 C20,20 80,20 90,50 C80,80 20,80 10,50 Z" fill="url(%23goldGrad)" stroke="url(%23goldGrad)" stroke-width="5"/>
+    </svg>
+  ') 30 stretch;
 }
 
 /* Heading with Gold Gradient & Shadow */
@@ -120,20 +103,4 @@ input {
   font-weight: bold;
   padding: 0 3px;
   border-radius: 3px;
-  animation: glow 1.5s ease-in-out infinite alternate;
-}
-
-@keyframes glow {
-  0% {
-    box-shadow: 0 0 3px #FFD700;
-    background-color: #FFD700;
-  }
-  50% {
-    box-shadow: 0 0 8px #FFD700;
-    background-color: #FFEC70;
-  }
-  100% {
-    box-shadow: 0 0 3px #FFD700;
-    background-color: #FFD700;
-  }
 }
