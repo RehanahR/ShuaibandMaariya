@@ -49,17 +49,26 @@ input {
   color: #fff; /* ensure result is readable on burgundy */
 }
 
+.search-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+  text-align: center; /* centre the list */
+}
+
 .guest-option {
   cursor: pointer;
-  color: #FFD700;
+  color: #FFD700; /* gold */
   padding: 0.3rem 0;
-  list-style: none;
-  transition: transform 0.1s;
+  transition: transform 0.1s, color 0.2s;
+  display: inline-block; /* centre properly */
+  min-width: 200px; /* optional: make each item a decent width */
 }
 
 .guest-option:hover {
   text-decoration: underline;
   transform: scale(1.05);
+  color: #FFECB3; /* lighter gold on hover */
 }
 
 .highlight {
