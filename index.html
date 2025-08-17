@@ -32,15 +32,35 @@
       // New version (search only when Enter is pressed)
       input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
-          const q = input.value.toLowerCase();
-          const match = guests.find(g => g.name.toLowerCase().includes(q));
-          if (match) {
-            result.innerHTML = `<h2>${match.name}</h2><p>Table: ${match.table}</p>`;
-          } else {
+          const query = input.value.trim().toLowerCase();
+          const matches = guests.filter(g => g.name.toLowerCase() === query);
+
+          if (matches.length === 0) {
             result.textContent = "No match found.";
+          } else if (matches.length === 1) {
+            showGuest(matches[0]);
+          } else {
+            result.innerHTML = `
+              <p>Multiple guests found. Please click your name:</p>
+              <ul>
+                ${matches.map((m, index) => `<li class="guest-option" data-index="${index}">${m.name}</li>`).join('')}
+              </ul>
+            `;
+
+            document.querySelectorAll('.guest-option').forEach(item => {
+              item.addEventListener('click', () => {
+                const index = item.getAttribute('data-index');
+                showGuest(matches[index]);
+              });
+            });
           }
         }
       });
+
+      // helper function to show table
+      function showGuest(guest) {
+        result.innerHTML = `<h2>${guest.name}</h2><p>Table: ${guest.table}</p>`;
+      }
     }
     loadData();
   </script>
