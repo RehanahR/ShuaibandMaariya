@@ -48,3 +48,16 @@ input {
   font-size: 1.3rem;
   color: #fff; /* ensure result is readable on burgundy */
 }
+
+.guest-option {
+  cursor: pointer;
+  color: #FFD700;
+  padding: 0.3rem 0;
+  list-style: none;
+  transition: transform 0.1s;
+}
+
+.guest-option:hover {
+  text-decoration: underline;
+  transform: scale(1.05);
+}
