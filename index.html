@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Find Your Table</title>
+  <title>Find Your Seat</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <main class="container">
     <header class="hero">
       <h1>Welcome to Shuaib and Maariya's Weddding Reception.</h1>
-      <p>Enter your name to find your table number.</p>
+      <p>Please enter your full name to find your table number.</p>
     </header>
 
     <section class="search-card">
-      <input id="nameInput" type="text" placeholder="Enter your name">
+      <input id="nameInput" type="text" placeholder="Enter your full name">
       <div id="result"></div>
     </section>
   </main>
@@ -29,13 +29,16 @@
       });
       const input = document.getElementById('nameInput');
       const result = document.getElementById('result');
-      input.addEventListener('input', () => {
-        const q = input.value.toLowerCase();
-        const match = guests.find(g => g.name.toLowerCase().includes(q));
-        if (match) {
-          result.innerHTML = `<h2>${match.name}</h2><p>Table: ${match.table}</p>`;
-        } else {
-          result.textContent = "No match yet…";
+      // New version (search only when Enter is pressed)
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const q = input.value.toLowerCase();
+          const match = guests.find(g => g.name.toLowerCase().includes(q));
+          if (match) {
+            result.innerHTML = `<h2>${match.name}</h2><p>Table: ${match.table}</p>`;
+          } else {
+            result.textContent = "No match found.";
+          }
         }
       });
     }
