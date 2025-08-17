@@ -33,7 +33,7 @@
       input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           const query = input.value.trim().toLowerCase();
-          const matches = guests.filter(g => g.name.toLowerCase() === query);
+          const matches = guests.filter(g => g.name.toLowerCase().includes(query));
 
           if (matches.length === 0) {
             result.textContent = "No match found.";
@@ -41,9 +41,13 @@
             showGuest(matches[0]);
           } else {
             result.innerHTML = `
-              <p>Multiple guests found. Please click your name:</p>
+              <p>Multiple guests found. Please select your name:</p>
               <ul>
-                ${matches.map((m, index) => `<li class="guest-option" data-index="${index}">${m.name}</li>`).join('')}
+                ${matches.map((m, index) => {
+                  const regex = new RegExp(`(${query})`, 'ig'); // match query part
+                  const highlighted = m.name.replace(regex, '<span class="highlight">$1</span>');
+                  return `<li class="guest-option" data-index="${index}">${highlighted}</li>`;
+                }).join('')}
               </ul>
             `;
 
@@ -57,7 +61,6 @@
         }
       });
 
-      // helper function to show table
       function showGuest(guest) {
         result.innerHTML = `<h2>${guest.name}</h2><p>Table: ${guest.table}</p>`;
       }
