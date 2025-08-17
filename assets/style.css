@@ -61,3 +61,11 @@ input {
   text-decoration: underline;
   transform: scale(1.05);
 }
+
+.highlight {
+  background-color: #FFD700; /* gold */
+  color: #6b0a16; /* burgundy text inside gold */
+  font-weight: bold;
+  padding: 0 2px;
+  border-radius: 3px;
+}
