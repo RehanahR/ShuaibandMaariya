@@ -7,17 +7,19 @@
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-  <main class="container">
-    <header class="hero">
-      <h1 class="wedding-title">  Welcome to<br>  Shuaib and Maariya's<br>  Wedding Reception</h1>
-      <p>Please enter your full name to find your table number.</p>
-    </header>
+  <div class="page-border">
+    <main class="container">
+      <header class="hero">
+        <h1 class="wedding-title">  Welcome to<br>  Shuaib and Maariya's<br>  Wedding Reception</h1>
+        <p>Please enter your full name to find your table number.</p>
+      </header>
 
-    <section class="search-card">
-      <input id="nameInput" type="text" placeholder="Enter your full name">
-      <div id="result"></div>
-    </section>
-  </main>
+      <section class="search-card">
+        <input id="nameInput" type="text" placeholder="Enter your full name">
+        <div id="result"></div>
+      </section>
+    </main>
+  </div>
   <script>
     async function loadData() {
       const res = await fetch('data/guestlist.csv');
