@@ -13,6 +13,47 @@ body {
   flex-direction: column;
 }
 
+/* Container for Swirling Border */
+.page-border {
+  position: relative;
+  padding: 2rem;
+  margin: 1rem;
+  border: 10px solid transparent;
+  border-radius: 20px;
+  background: #6b0a16; /* burgundy inside */
+  background-clip: padding-box; /* keep inner bg inside */
+}
+
+/* Animated Gold Swirl Border with Glow */
+.page-border::before {
+  content: "";
+  position: absolute;
+  top: -10px; left: -10px; right: -10px; bottom: -10px;
+  border-radius: 30px;
+  padding: 10px;
+  background: conic-gradient(
+    from 0deg,
+    #FFD700,
+    #FFEC70,
+    #FFD700,
+    #FFEC70,
+    #FFD700
+  );
+  z-index: -1;
+  animation: swirl 8s linear infinite, glowBorder 2s ease-in-out infinite alternate;
+}
+
+@keyframes swirl {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes glowBorder {
+  0% { box-shadow: 0 0 10px #FFD700; }
+  50% { box-shadow: 0 0 25px #FFD700; }
+  100% { box-shadow: 0 0 10px #FFD700; }
+}
+
 /* Heading with Gold Gradient & Shadow */
 .wedding-title {
   text-align: center;
@@ -49,6 +90,7 @@ input {
   color: #fff; /* ensure result is readable on burgundy */
 }
 
+/* Guest List Clickable Names */
 .search-card ul {
   list-style: none;
   padding: 0;
@@ -71,6 +113,7 @@ input {
   color: #FFECB3; /* lighter gold on hover */
 }
 
+/* Highlight Matching Text */
 .highlight {
   background-color: #FFD700; /* gold */
   color: #6b0a16; /* burgundy text inside gold */
