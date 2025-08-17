@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Find Your Table</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <h1>Welcome ✨</h1>
+      <p>Type your name to find your table.</p>
+    </header>
+
+    <section class="search-card">
+      <input id="nameInput" type="text" placeholder="Enter your name">
+      <div id="result"></div>
+    </section>
+  </main>
+  <script>
+    async function loadData() {
+      const res = await fetch('data/guestlist.csv');
+      const text = await res.text();
+      const rows = text.trim().split(/\r?\n/).slice(1);
+      const guests = rows.map(r => {
+        const [name, table] = r.split(',');
+        return {name, table};
+      });
+      const input = document.getElementById('nameInput');
+      const result = document.getElementById('result');
+      input.addEventListener('input', () => {
+        const q = input.value.toLowerCase();
+        const match = guests.find(g => g.name.toLowerCase().includes(q));
+        if (match) {
+          result.innerHTML = `<h2>${match.name}</h2><p>Table: ${match.table}</p>`;
+        } else {
+          result.textContent = "No match yet…";
+        }
+      });
+    }
+    loadData();
+  </script>
+</body>
+</html>

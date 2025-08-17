@@ -1,0 +1,4 @@
+body { font-family: sans-serif; background:#fafafa; text-align:center; padding:2rem; }
+.container { max-width:500px; margin:auto; }
+input { padding:1rem; width:100%; border-radius:8px; border:1px solid #ccc; font-size:1.2rem; }
+#result { margin-top:1.5rem; font-size:1.3rem; }
