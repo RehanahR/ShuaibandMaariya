@@ -53,9 +53,9 @@
             <p>Multiple guests found. Please select your name:</p>
             <ul>
               ${matches.map((m, index) => {
-                const regex = new RegExp(\`(\${query})\`, 'ig');
+                const regex = new RegExp(`(${query})`, 'ig');
                 const highlighted = m.name.replace(regex, '<span class="highlight">$1</span>');
-                return \`<li class="guest-option" data-index="\${index}">\${highlighted}</li>\`;
+                return `<li class="guest-option" data-index="${index}">${highlighted}</li>`;
               }).join('')}
             </ul>
           `;
@@ -70,15 +70,13 @@
       }
 
       function showGuest(guest) {
-        result.innerHTML = \`<h2>\${guest.name}</h2><p>Table: \${guest.table}</p>\`;
+        result.innerHTML = `<h2>${guest.name}</h2><p>Table: ${guest.table}</p>`;
       }
 
-      // Trigger search on Enter
       input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') searchGuest();
       });
 
-      // Trigger search on button click
       button.addEventListener('click', searchGuest);
     }
 
