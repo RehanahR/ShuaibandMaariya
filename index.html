@@ -28,15 +28,40 @@
     async function loadData() {
       const res = await fetch('data/guestlist.csv');
       const text = await res.text();
-      const rows = text.trim().split(/\r?\n/).slice(1); // skip header
+      const rows = text.trim().split(/\r?\n/).slice(1);
+      // CSV columns: name,table,familyID
       const guests = rows.map(r => {
-        const [name, table] = r.split(',');
-        return { name, table };
+        const [name, table, familyID] = r.split(',');
+        return { name, table, familyID };
       });
 
       const input = document.getElementById('nameInput');
       const result = document.getElementById('result');
-      const button = document.getElementById('searchBtn');
+      const searchBtn = document.getElementById('searchBtn');
+      let lastFoundGuest = null;
+
+      function showGuest(guest) {
+        lastFoundGuest = guest;
+        result.innerHTML = `<h2>${guest.name}</h2><p>Table: ${guest.table}</p>`;
+        
+        // Add button to show family tables
+        const familyBtn = document.createElement('button');
+        familyBtn.id = 'familyBtn';
+        familyBtn.textContent = "Show Family Tables";
+        familyBtn.addEventListener('click', showFamilyTables);
+        result.appendChild(familyBtn);
+      }
+
+      function showFamilyTables() {
+        if (!lastFoundGuest) return;
+        const familyID = lastFoundGuest.familyID;
+        const family = guests.filter(g => g.familyID === familyID);
+
+        let html = `<h3>Family Tables:</h3><ul>`;
+        family.forEach(f => html += `<li>${f.name} - Table: ${f.table}</li>`);
+        html += `</ul>`;
+        result.innerHTML += html;
+      }
 
       function searchGuest() {
         const query = input.value.trim().toLowerCase();
@@ -49,35 +74,19 @@
         } else if (matches.length === 1) {
           showGuest(matches[0]);
         } else {
-          result.innerHTML = `
-            <p>Multiple guests found. Please select your name:</p>
-            <ul>
-              ${matches.map((m, index) => {
-                const regex = new RegExp(`(${query})`, 'ig');
-                const highlighted = m.name.replace(regex, '<span class="highlight">$1</span>');
-                return `<li class="guest-option" data-index="${index}">${highlighted}</li>`;
-              }).join('')}
-            </ul>
-          `;
-
-          document.querySelectorAll('.guest-option').forEach(item => {
-            item.addEventListener('click', () => {
-              const index = item.getAttribute('data-index');
-              showGuest(matches[index]);
-            });
+          result.innerHTML = `<p>Multiple guests found. Please select your name:</p><ul>`;
+          matches.forEach((m, index) => {
+            const li = document.createElement('li');
+            li.className = 'guest-option';
+            li.innerHTML = m.name;
+            li.addEventListener('click', () => showGuest(matches[index]));
+            result.querySelector('ul').appendChild(li);
           });
         }
       }
 
-      function showGuest(guest) {
-        result.innerHTML = `<h2>${guest.name}</h2><p>Table: ${guest.table}</p>`;
-      }
-
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') searchGuest();
-      });
-
-      button.addEventListener('click', searchGuest);
+      input.addEventListener('keydown', e => { if (e.key === 'Enter') searchGuest(); });
+      searchBtn.addEventListener('click', searchGuest);
     }
 
     loadData();
