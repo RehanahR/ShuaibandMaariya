@@ -3,3 +3,7 @@ This repository creates a webpage that queries a .csv file (with full names, sea
 It also finds associated family members and can display their seating arrangement table allocations, as well.
 
 Tinyurl generated: https://tinyurl.com/35eswkrp
+
+
+Scan this to access the repo:
+![QR Code](qrcode.png)
