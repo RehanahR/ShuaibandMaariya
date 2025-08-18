@@ -13,7 +13,7 @@ body {
 
 /* Heading with Gold Gradient & Shadow */
 .wedding-title {
-  font-size: 3rem;
+  font-size: 2rem;
   line-height: 1.2;
   background: linear-gradient(90deg, #FFD700, #FFA500);
   -webkit-background-clip: text;
