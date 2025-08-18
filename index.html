@@ -19,7 +19,7 @@
 
     <section class="search-card">
       <input id="nameInput" type="text" placeholder="Enter your full name">
-      <button id="searchBtn">Enter</button>
+      <button id="searchBtn">Find My Table</button>
       <div id="result"></div>
     </section>
   </main>
@@ -28,7 +28,7 @@
     async function loadData() {
       const res = await fetch('data/guestlist.csv');
       const text = await res.text();
-      const rows = text.trim().split(/\r?\n/).slice(1);
+      const rows = text.trim().split(/\r?\n/).slice(1); // skip header
       const guests = rows.map(r => {
         const [name, table] = r.split(',');
         return { name, table };
@@ -40,6 +40,8 @@
 
       function searchGuest() {
         const query = input.value.trim().toLowerCase();
+        if (!query) return;
+
         const matches = guests.filter(g => g.name.toLowerCase().includes(query));
 
         if (matches.length === 0) {
@@ -71,7 +73,7 @@
         result.innerHTML = `<h2>${guest.name}</h2><p>Table: ${guest.table}</p>`;
       }
 
-      // Trigger search on Enter key
+      // Trigger search on Enter
       input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') searchGuest();
       });
