@@ -62,6 +62,10 @@
         html += `<div>${f.name} - Table: ${f.table}</div>`;
       });
       result.innerHTML += html;
+
+      // Remove the "Show My Family's Tables" button after click
+      const familyBtn = document.getElementById('familyBtn');
+      if (familyBtn) familyBtn.remove();
     }
 
     function searchGuest() {
