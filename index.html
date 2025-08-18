@@ -50,9 +50,9 @@
               <p>Multiple guests found. Please click your name:</p>
               <ul>
                 ${matches.map((m, index) => {
-                  const regex = new RegExp(\`(\${query})\`, 'ig');
+                  const regex = new RegExp(`(${query})`, 'ig'); // match query part
                   const highlighted = m.name.replace(regex, '<span class="highlight">$1</span>');
-                  return \`<li class="guest-option" data-index="\${index}">\${highlighted}</li>\`;
+                  return `<li class="guest-option" data-index="${index}">${highlighted}</li>`;
                 }).join('')}
               </ul>
             `;
@@ -70,7 +70,6 @@
       function showGuest(guest) {
         result.innerHTML = `<h2>${guest.name}</h2><p>Table: ${guest.table}</p>`;
       }
-    }
 
     loadData();
   </script>
