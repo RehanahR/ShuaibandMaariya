@@ -9,7 +9,6 @@ body {
   align-items: center;
   min-height: 100vh;
   margin: 0;
-  flex-direction: column;
 }
 
 /* Heading with Gold Gradient & Shadow */
