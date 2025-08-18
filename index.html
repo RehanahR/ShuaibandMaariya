@@ -67,7 +67,7 @@
       const familyBtn = document.getElementById('familyBtn');
       if (familyBtn) familyBtn.remove();
     }
-
+    
     function searchGuest() {
       const query = input.value.trim().toLowerCase();
       if (!query) return;
@@ -83,7 +83,12 @@
         matches.forEach((m, index) => {
           const div = document.createElement('div');
           div.className = 'guest-option';
-          div.textContent = m.name;
+
+          // Highlight the matching part
+          const regex = new RegExp(`(${query})`, 'ig');
+          const highlightedName = m.name.replace(regex, `<span class="highlight">$1</span>`);
+          div.innerHTML = highlightedName;
+
           div.addEventListener('click', () => showGuest(matches[index]));
           result.appendChild(div);
         });
