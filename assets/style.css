@@ -1,59 +1,40 @@
 /* Page Background & General Font */
 body {
-  font-family: 'Georgia', serif; /* elegant serif font for wedding theme */
-  background-color: #6b0a16;      /* deep burgundy background */
-  color: #fff;                     /* default text color */
+  font-family: 'Georgia', serif;
+  background-color: #6b0a16;  /* deep burgundy */
+  color: #fff;
   text-align: center;
-  padding: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;               /* full screen height */
+  min-height: 100vh;
   margin: 0;
   flex-direction: column;
 }
 
-/* Container with Static Gold Swirl SVG Border */
-.page-border {
-  position: relative;
-  padding: 2rem;
-  margin: 1rem;
-  border: 20px solid transparent;
-  border-radius: 30px;
-  background-color: #6b0a16; /* burgundy inside */
-  background-clip: padding-box;
-
-  /* Decorative swirl border using inline SVG pattern */
-  border-image: url('data:image/svg+xml;utf8,
-    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
-      <defs>
-        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="%23FFD700"/>
-          <stop offset="100%" stop-color="%23FFA500"/>
-        </linearGradient>
-      </defs>
-      <path d="M10,50 C20,20 80,20 90,50 C80,80 20,80 10,50 Z" fill="url(%23goldGrad)" stroke="url(%23goldGrad)" stroke-width="5"/>
-    </svg>
-  ') 30 stretch;
-}
-
 /* Heading with Gold Gradient & Shadow */
 .wedding-title {
-  text-align: center;
   font-size: 3rem;
   line-height: 1.2;
-  background: linear-gradient(90deg, #FFD700, #FFA500); /* gold gradient */
+  background: linear-gradient(90deg, #FFD700, #FFA500);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* subtle shadow */
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
   margin-bottom: 2rem;
 }
 
-/* Container for Search Box */
+/* Container */
 .container {
   max-width: 500px;
   width: 100%;
   margin: auto;
+  padding: 2rem;
+}
+
+/* Search Card */
+.search-card {
+  padding: 2rem;
+  text-align: center;
 }
 
 /* Input Styles */
@@ -61,51 +42,12 @@ input {
   padding: 1rem;
   width: 100%;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: none;
   font-size: 1.2rem;
   box-sizing: border-box;
 }
 
-/* Result Text */
-#result {
-  margin-top: 1.5rem;
-  font-size: 1.3rem;
-  color: #fff; /* ensure result is readable on burgundy */
-}
-
-/* Guest List Clickable Names */
-.search-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 1rem 0 0 0;
-  text-align: center; /* centre the list */
-}
-
-.guest-option {
-  cursor: pointer;
-  color: #FFD700; /* gold */
-  padding: 0.3rem 0;
-  transition: transform 0.1s, color 0.2s;
-  display: inline-block; /* centre properly */
-  min-width: 200px; /* optional: make each item a decent width */
-}
-
-.guest-option:hover {
-  text-decoration: underline;
-  transform: scale(1.05);
-  color: #FFECB3; /* lighter gold on hover */
-}
-
-/* Highlight Matching Text */
-.highlight {
-  background-color: #FFD700; /* gold */
-  color: #6b0a16; /* burgundy text inside gold */
-  font-weight: bold;
-  padding: 0 3px;
-  border-radius: 3px;
-}
-
-/* Enter Button Styles */
+/* Enter Button */
 #searchBtn {
   margin-top: 1rem;
   padding: 0.8rem 2rem;
@@ -113,7 +55,7 @@ input {
   border-radius: 8px;
   border: none;
   background: linear-gradient(90deg, #FFD700, #FFA500);
-  color: #6b0a16; /* burgundy text */
+  color: #6b0a16;
   font-weight: bold;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -122,4 +64,34 @@ input {
 #searchBtn:hover {
   transform: scale(1.05);
   box-shadow: 0 0 10px #FFD700;
+}
+
+/* Result Text */
+#result {
+  margin-top: 1.5rem;
+  font-size: 1.3rem;
+  color: #fff;
+}
+
+/* Guest Options */
+.search-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+  text-align: center;
+}
+
+.guest-option {
+  cursor: pointer;
+  color: #FFD700;
+  padding: 0.3rem 0;
+  transition: transform 0.1s, color 0.2s;
+  display: inline-block;
+  min-width: 200px;
+}
+
+.guest-option:hover {
+  text-decoration: underline;
+  transform: scale(1.05);
+  color: #FFECB3;
 }
