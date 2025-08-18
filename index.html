@@ -7,22 +7,25 @@
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-  <div class="page-border">
-    <main class="page-border container">
-      <header class="hero">
-        <h1 class="wedding-title">  Welcome to<br>  Shuaib and Maariya's<br>  Wedding Reception</h1>
-        <p>Please enter your full name to find your table number.</p>
-      </header>
+  <main class="container">
+    <header class="hero">
+      <h1 class="wedding-title">
+        Welcome to<br>
+        Shuaib and Maariya's<br>
+        Wedding Reception
+      </h1>
+      <p>Please enter your full name to find your table number.</p>
+    </header>
 
-      <section class="search-card">
-        <form id="guestForm">
-          <input id="nameInput" type="text" placeholder="Enter your full name" autocomplete="off">
-          <button type="Submit" id="searchBtn">Enter</button>
-        </form>
-        <div id="result"></div>
-      </section>
-    </main>
-  </div>
+    <section class="search-card">
+      <form id="guestForm">
+        <input id="nameInput" type="text" placeholder="Enter your full name" autocomplete="off">
+        <button type="submit" id="searchBtn">Enter</button>
+      </form>
+      <div id="result"></div>
+    </section>
+  </main>
+
   <script>
     async function loadData() {
       const res = await fetch('data/guestlist.csv');
@@ -32,14 +35,14 @@
         const [name, table] = r.split(',');
         return {name, table};
       });
+
       const form = document.getElementById('guestForm');
       const input = document.getElementById('nameInput');
       const result = document.getElementById('result');
 
       form.addEventListener('submit', (e) => {
-        e.preventDefault(); // prevent form from reloading the page
+        e.preventDefault();
         const q = input.value.toLowerCase().trim();
-
         const matches = guests.filter(g => g.name.toLowerCase().includes(q));
 
         if (matches.length === 0) {
@@ -47,14 +50,14 @@
         } else if (matches.length === 1) {
           result.innerHTML = `<h2>${matches[0].name}</h2><p>Table: ${matches[0].table}</p>`;
         } else {
-          // Multiple matches
-          const list = matches.map(g => `<li class="guest-option" onclick="selectGuest('${g.name}','${g.table}')">${g.name}</li>`).join('');
+          const list = matches.map(g => 
+            `<li class="guest-option" onclick="selectGuest('${g.name}','${g.table}')">${g.name}</li>`
+          ).join('');
           result.innerHTML = `<p>Multiple guests found. Please select your full name:</p><ul>${list}</ul>`;
         }
       });
 
-      // Function to select guest from multiple options
-      function selectGuest(name, table) {
+      window.selectGuest = function(name, table) {
         result.innerHTML = `<h2>${name}</h2><p>Table: ${table}</p>`;
       }
     }
