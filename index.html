@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Find Your Seat</title>
+  <title>Find Your Table</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -19,6 +19,7 @@
 
     <section class="search-card">
       <input id="nameInput" type="text" placeholder="Enter your full name">
+      <button id="searchBtn">Enter</button>
       <div id="result"></div>
     </section>
   </main>
@@ -35,41 +36,48 @@
 
       const input = document.getElementById('nameInput');
       const result = document.getElementById('result');
+      const searchBtn = document.getElementById('searchBtn');
 
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          const query = input.value.trim().toLowerCase();
-          const matches = guests.filter(g => g.name.toLowerCase().includes(query));
+      function searchGuest() {
+        const query = input.value.trim().toLowerCase();
+        const matches = guests.filter(g => g.name.toLowerCase().includes(query));
 
-          if (matches.length === 0) {
-            result.textContent = "No match found.";
-          } else if (matches.length === 1) {
-            showGuest(matches[0]);
-          } else {
-            result.innerHTML = `
-              <p>Multiple guests found. Please click your name:</p>
-              <ul>
-                ${matches.map((m, index) => {
-                  const regex = new RegExp(\`(\${query})\`, 'ig');
-                  const highlighted = m.name.replace(regex, '<span class="highlight">$1</span>');
-                  return \`<li class="guest-option" data-index="\${index}">\${highlighted}</li>\`;
-                }).join('')}
-              </ul>
-            `;
+        if (matches.length === 0) {
+          result.textContent = "No match found.";
+        } else if (matches.length === 1) {
+          showGuest(matches[0]);
+        } else {
+          result.innerHTML = `
+            <p>Multiple guests found. Please select your name:</p>
+            <ul>
+              ${matches.map((m, index) => {
+                const regex = new RegExp(\`(\${query})\`, 'ig');
+                const highlighted = m.name.replace(regex, '<span class="highlight">$1</span>');
+                return \`<li class="guest-option" data-index="\${index}">\${highlighted}</li>\`;
+              }).join('')}
+            </ul>
+          `;
 
-            document.querySelectorAll('.guest-option').forEach(item => {
-              item.addEventListener('click', () => {
-                const index = item.getAttribute('data-index');
-                showGuest(matches[index]);
-              });
+          document.querySelectorAll('.guest-option').forEach(item => {
+            item.addEventListener('click', () => {
+              const index = item.getAttribute('data-index');
+              showGuest(matches[index]);
             });
-          }
+          });
         }
-      });
+      }
 
       function showGuest(guest) {
         result.innerHTML = `<h2>${guest.name}</h2><p>Table: ${guest.table}</p>`;
       }
+
+      // Trigger search on button click
+      searchBtn.addEventListener('click', searchGuest);
+
+      // Optional: also trigger search on Enter key
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') searchGuest();
+      });
     }
 
     loadData();
