@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Find Your Table</title>
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main class="container">
@@ -19,7 +19,7 @@
 
     <section class="search-card">
       <input id="nameInput" type="text" placeholder="Enter your full name">
-      <button id="searchBtn">Find My Table</button>
+      <button id="searchBtn">Enter</button>
       <div id="result"></div>
     </section>
   </main>
@@ -50,12 +50,12 @@
           showGuest(matches[0]);
         } else {
           result.innerHTML = `
-            <p>Multiple guests found. Please click your name:</p>
+            <p>Multiple guests found. Please select your name:</p>
             <ul>
               ${matches.map((m, index) => {
-                const regex = new RegExp(`(${query})`, 'ig');
+                const regex = new RegExp(\`(\${query})\`, 'ig');
                 const highlighted = m.name.replace(regex, '<span class="highlight">$1</span>');
-                return `<li class="guest-option" data-index="${index}">${highlighted}</li>`;
+                return \`<li class="guest-option" data-index="\${index}">\${highlighted}</li>\`;
               }).join('')}
             </ul>
           `;
@@ -70,7 +70,7 @@
       }
 
       function showGuest(guest) {
-        result.innerHTML = `<h2>${guest.name}</h2><p>Table: ${guest.table}</p>`;
+        result.innerHTML = \`<h2>\${guest.name}</h2><p>Table: \${guest.table}</p>\`;
       }
 
       // Trigger search on Enter
