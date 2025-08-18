@@ -18,10 +18,7 @@
     </header>
 
     <section class="search-card">
-      <form id="guestForm">
-        <input id="nameInput" type="text" placeholder="Enter your full name" autocomplete="off">
-        <button type="submit" id="searchBtn">Enter</button>
-      </form>
+      <input id="nameInput" type="text" placeholder="Enter your full name">
       <div id="result"></div>
     </section>
   </main>
@@ -30,37 +27,51 @@
     async function loadData() {
       const res = await fetch('data/guestlist.csv');
       const text = await res.text();
-      const rows = text.trim().split(/\r?\n/).slice(1);
+      const rows = text.trim().split(/\r?\n/).slice(1); // skip header
       const guests = rows.map(r => {
         const [name, table] = r.split(',');
-        return {name, table};
+        return { name, table };
       });
 
-      const form = document.getElementById('guestForm');
       const input = document.getElementById('nameInput');
       const result = document.getElementById('result');
 
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const q = input.value.toLowerCase().trim();
-        const matches = guests.filter(g => g.name.toLowerCase().includes(q));
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const query = input.value.trim().toLowerCase();
+          const matches = guests.filter(g => g.name.toLowerCase().includes(query));
 
-        if (matches.length === 0) {
-          result.textContent = "No match found.";
-        } else if (matches.length === 1) {
-          result.innerHTML = `<h2>${matches[0].name}</h2><p>Table: ${matches[0].table}</p>`;
-        } else {
-          const list = matches.map(g => 
-            `<li class="guest-option" onclick="selectGuest('${g.name}','${g.table}')">${g.name}</li>`
-          ).join('');
-          result.innerHTML = `<p>Multiple guests found. Please select your full name:</p><ul>${list}</ul>`;
+          if (matches.length === 0) {
+            result.textContent = "No match found.";
+          } else if (matches.length === 1) {
+            showGuest(matches[0]);
+          } else {
+            result.innerHTML = `
+              <p>Multiple guests found. Please click your name:</p>
+              <ul>
+                ${matches.map((m, index) => {
+                  const regex = new RegExp(\`(\${query})\`, 'ig');
+                  const highlighted = m.name.replace(regex, '<span class="highlight">$1</span>');
+                  return \`<li class="guest-option" data-index="\${index}">\${highlighted}</li>\`;
+                }).join('')}
+              </ul>
+            `;
+
+            document.querySelectorAll('.guest-option').forEach(item => {
+              item.addEventListener('click', () => {
+                const index = item.getAttribute('data-index');
+                showGuest(matches[index]);
+              });
+            });
+          }
         }
       });
 
-      window.selectGuest = function(name, table) {
-        result.innerHTML = `<h2>${name}</h2><p>Table: ${table}</p>`;
+      function showGuest(guest) {
+        result.innerHTML = `<h2>${guest.name}</h2><p>Table: ${guest.table}</p>`;
       }
     }
+
     loadData();
   </script>
 </body>
