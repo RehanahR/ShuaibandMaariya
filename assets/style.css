@@ -76,7 +76,7 @@ input {
 }
 
 /* Buttons */
-#searchBtn, #familyBtn {
+#searchBtn {
   margin-top: 1rem;
   padding: 0.8rem 2rem;
   font-size: 1.2rem;
@@ -89,7 +89,23 @@ input {
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-#searchBtn:hover, #familyBtn:hover {
+#searchBtn:hover {
   transform: scale(1.05);
   box-shadow: 0 0 10px #FFD700;
+}
+
+
+#familyBtn {
+  padding: 6px 12px;   /* smaller than default */
+  font-size: 0.9rem;   /* slightly smaller text */
+  margin-top: 10px;
+  cursor: pointer;
+  background-color: #d4af37;  /* gold color */
+  border: none;
+  border-radius: 4px;
+  color: white;
+}
+
+#familyBtn:hover {
+  background-color: #c49f2f; /* darker gold on hover */
 }
