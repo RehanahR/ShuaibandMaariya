@@ -96,16 +96,18 @@ input {
 
 
 #familyBtn {
+  margin-top: 10px;
   padding: 6px 12px;   /* smaller than default */
   font-size: 0.9rem;   /* slightly smaller text */
-  margin-top: 10px;
-  cursor: pointer;
-  background-color: #d4af37;  /* gold color */
-  border: none;
   border-radius: 4px;
-  color: white;
+  border: none;
+  background: linear-gradient(90deg, #FFD700, #FFA500);
+  color: #6b0a16;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 #familyBtn:hover {
-  background-color: #c49f2f; /* darker gold on hover */
-}
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #FFD700;}
