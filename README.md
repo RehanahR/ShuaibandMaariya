@@ -5,5 +5,5 @@ It also finds associated family members and can display their seating arrangemen
 Tinyurl generated: https://tinyurl.com/35eswkrp
 
 
-Scan this to access the repo:
+Scan this to access the webpage:
 ![QR Code](qrcode.png)
