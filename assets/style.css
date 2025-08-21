@@ -1,6 +1,7 @@
 /* Page Background & General Font */
 body {
-  font-family: 'Georgia', serif;
+  /*font-family: 'Georgia', serif;*/
+  font-family: 'brush-script MT', cursive;
   background-color: #6b0a16;
   color: #fff;
   text-align: center;
@@ -12,8 +13,37 @@ body {
 }
 
 /* Heading with Gold Gradient & Shadow */
+@font-face {
+  font-family: 'Aceh-Darusalam';
+  src: url('fonts/Aceh-Darusalam.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Apply to your wedding title */
+/*.wedding-title {
+  font-family: 'Aceh-Darusalam', 'Georgia', serif;
+  font-size: 4rem;
+  line-height: 1.2;
+  color: #E6B800;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+  margin-bottom: 2rem;
+}*/
+
+
+/*.wedding-title {
+  font-family: 'Aceh-Darusalam', 'Georgia', serif;
+  font-size: 4rem;
+  line-height: 1.2;
+  background: linear-gradient(90deg, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  margin-bottom: 2rem;
+}*/
+
 .wedding-title {
-  font-size: 2rem;
+  font-size: 3rem;
   line-height: 1.2;
   background: linear-gradient(90deg, #FFD700, #FFA500);
   -webkit-background-clip: text;
