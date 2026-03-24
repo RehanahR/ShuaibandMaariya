@@ -88,7 +88,7 @@ input {
 /* Guest Options */
 .guest-option {
   cursor: pointer;
-  color: #000000;
+  color: #ff0202;
   padding: 0.3rem 0;
   display: inline-block;
   min-width: 200px;
