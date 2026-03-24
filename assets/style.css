@@ -4,7 +4,7 @@ body {
   font-family: 'brush-script MT', cursive;
   /*background-color: #6b0a16;*/
   background-color: #bb9499;
-  color: #fff;
+  color: #000;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -80,7 +80,7 @@ input {
 #result {
   margin-top: 1.5rem;
   font-size: 1.3rem;
-  color: #fff;
+  color: #000;
 }
 
 /* Guest Options */
