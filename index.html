@@ -44,12 +44,15 @@
       lastFoundGuest = guest;
       result.innerHTML = `<h2>${guest.name}</h2><p>Table: ${guest.table}</p>`;
 
-      // Add button to show family tables
-      const familyBtn = document.createElement('button');
-      familyBtn.id = 'familyBtn';
-      familyBtn.textContent = "Show My Family's Tables";
-      familyBtn.addEventListener('click', showFamilyTables);
-      result.appendChild(familyBtn);
+      const hasFamilyID = guest.familyID && guest.familyID.trim().length > 0;
+      if (hasFamilyID) {
+        // Add button to show family tables
+        const familyBtn = document.createElement('button');
+        familyBtn.id = 'familyBtn';
+        familyBtn.textContent = "Show My Family's Tables";
+        familyBtn.addEventListener('click', showFamilyTables);
+        result.appendChild(familyBtn);
+      }
     }
 
     function showFamilyTables() {
